@@ -1,0 +1,46 @@
+﻿@using StokTakipMVC.Models.Entity
+@model List<TblUrunler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using(Html.BeginForm("Index","Urun",FormMethod.Get))
+            {
+                <p>
+                    Ürün Adı:@Html.TextBox("p");
+                    <input type="submit" value="Ara" />
+                </p>
+            }
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>ÜRÜN ADI</th>
+        <th>MARKA</th>
+        <th>STOK</th>
+        <th>ALIŞ FİYAT</th>
+        <th>SATIŞ FİYAT</th>
+        <th>KATEGORİ</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+
+    @foreach (var ktg in Model)
+    {
+        <tr>
+            <td>@ktg.Id</td>
+            <td>@ktg.Ad</td>
+            <td>@ktg.Marka</td>
+            <td>@ktg.Stok</td>
+            <td>@ktg.AlisFiyat</td>
+            <td>@ktg.SatisFiyat</td>
+            <td>@ktg.TblKategori.Ad</td>
+
+            <td><a href="/Urun/UrunSil/@ktg.Id" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Urun/UrunGetir/@ktg.Id" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Urun/YeniUrun/" class="btn btn-primary">Yeni Ürün Girişi</a>
+
